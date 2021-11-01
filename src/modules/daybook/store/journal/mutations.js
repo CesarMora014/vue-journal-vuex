@@ -1,6 +1,11 @@
 const mutations = {
-    setEntries( /*state*/ ){
-    
+    setEntries( state, entries ){
+        state.entries = [
+            ...state.entries,
+            ...entries
+        ]
+
+        state.isLoading =  false
     },
     updateEntry( /*state*/ ){
     
