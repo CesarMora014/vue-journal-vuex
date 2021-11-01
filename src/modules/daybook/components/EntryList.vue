@@ -3,11 +3,12 @@
         <div class="px-4 py-4">
             <input type="text"
             class="form-control"
-            placeholder="Buscar entradas"/>
+            placeholder="Buscar entradas"
+            v-model="term"/>
         </div>
 
         <div class="entry-scrollarea px-2">
-            <Entry v-for="item in 100" :key="item" />
+            <Entry v-for="entry in entriesByTerm" :key="entry.id" :entry="entry"/>
         </div>
 
     </div>
@@ -15,10 +16,22 @@
 
 <script>
 import {defineAsyncComponent} from 'vue'
+import { mapGetters } from 'vuex'
 
 export default {
     components:{
         Entry:  defineAsyncComponent(() => import('../components/Entry')),
+    },
+    computed:{
+        ...mapGetters('journal', [ 'getEntriesByTerm' ]),
+        entriesByTerm(){
+            return this.getEntriesByTerm( this.term )
+        }
+    },
+    data(){
+        return {
+            term: ''
+        }
     }
 }
 </script>
