@@ -1,13 +1,17 @@
 <template>
     <div class="entry-list-container">
-        <div class="px-4 py-4">
+        <div class="px-4 py-2">
             <input type="text"
             class="form-control"
             placeholder="Buscar entradas"
             v-model="term"/>
         </div>
 
-        <div class="entry-scrollarea px-2">
+        <div class="p-2 d-flex flex-column">
+            <button class="btn btn-primary" @click="createEntry">Crear entrada</button>
+        </div>
+
+        <div class="entry-scrollarea px-2 mt-2">
             <Entry v-for="entry in entriesByTerm" :key="entry.id" :entry="entry"/>
         </div>
 
@@ -31,6 +35,11 @@ export default {
     data(){
         return {
             term: ''
+        }
+    },
+    methods:{
+        createEntry(){
+            this.$router.push({ name: 'entry', params: { id: 'new' } })
         }
     }
 }
